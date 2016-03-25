@@ -20235,22 +20235,23 @@
 	var Main = function (_React$Component) {
 	  _inherits(Main, _React$Component);
 	
-	  function Main(props) {
+	  function Main() {
+	    var _Object$getPrototypeO;
+	
+	    var _temp, _this, _ret;
+	
 	    _classCallCheck(this, Main);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
 	
-	    _this.state = getState();
-	    _this.onChange = _this.onChange.bind(_this);
-	    return _this;
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Main)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = getState(), _this.onChange = function () {
+	      _this.setState(getState());
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 	
 	  _createClass(Main, [{
-	    key: 'onChange',
-	    value: function onChange() {
-	      this.setState(getState());
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      (0, _api.fetchPodcasts)();
@@ -20264,7 +20265,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var podcasts = this.state.podcasts.map(function (podcast) {
+	      var modifiedArray = this.state.podcasts.slice(this.state.podcasts.length - this.props.limit, this.state.podcasts.lenght);
+	      var podcasts = modifiedArray.reverse().map(function (podcast) {
 	        return _react2.default.createElement(
 	          'li',
 	          { key: podcast._id },
@@ -20299,6 +20301,12 @@
 	  return Main;
 	}(_react2.default.Component);
 	
+	Main.propTypes = {
+	  limit: _react2.default.PropTypes.number
+	};
+	Main.defaultProps = {
+	  limit: 6
+	};
 	exports.default = Main;
 
 /***/ },

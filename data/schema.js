@@ -32,7 +32,7 @@ let Schema = (db) => {
       podcasts: {
         type: new GraphQLList(podcastType),
         resolve() {
-         return db.collection('podcasts-test').find({}).toArray();
+         return db.collection('podcasts').find({}).toArray();
         }
       },
       message: {

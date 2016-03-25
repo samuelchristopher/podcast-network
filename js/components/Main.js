@@ -8,13 +8,18 @@ let getState = () => {
   }
 };
 
-export default class Main extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state =  getState();
-    this.onChange = this.onChange.bind(this);
+class Main extends React.Component {
+  static propTypes = {
+    limit: React.PropTypes.number
   }
-  onChange() {
+
+  static defaultProps = {
+    limit: 6
+  }
+
+  state =  getState();
+
+  onChange = () => {
     this.setState(getState());
   }
   componentDidMount() {
@@ -25,7 +30,8 @@ export default class Main extends React.Component {
     PodcastStore.removeListener('change', this.onChange);
   }
   render() {
-    const podcasts = this.state.podcasts.map((podcast) => {
+    const modifiedArray = this.state.podcasts.slice(this.state.podcasts.length - this.props.limit, this.state.podcasts.lenght);
+    const podcasts = modifiedArray.reverse().map((podcast) => {
       return (
         <li key={podcast._id}>
           <a href={podcast.url}>{podcast.title} ({podcast.author})</a>
@@ -43,3 +49,5 @@ export default class Main extends React.Component {
     );
   }
 }
+
+export default Main;
