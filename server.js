@@ -1,10 +1,16 @@
 import express from 'express';
+import schema from './data/schema';
+import GraphQLHTTP from 'express-graphql';
 import { MongoClient } from 'mongodb';
 
 let app = express();
 let db;
 
-app.use(express.static('public'))
+app.use(express.static('public'));
+app.use('/data', GraphQLHTTP({
+  graphiql: true,
+  schema
+}));
 
 MongoClient.connect(process.env.MONGO_URL, (err, database) => {
   if (err) throw err;
