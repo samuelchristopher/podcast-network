@@ -10,7 +10,6 @@ class PodcastStore extends EventEmitter {
     Dispatcher.register(action => {
       switch(action.type) {
         case RECEIVE_PODCASTS:
-          console.log('in store');
           _podcasts = action.payload.podcasts;
           this.emit('change');
           break;

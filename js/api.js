@@ -2,7 +2,6 @@ import request from 'superagent';
 import { receivePodcasts } from './actions/serverActions';
 
 export let fetchPodcasts = () => {
-  console.log('In API')
   request
     .post('/data', {
       query: `{

@@ -15,7 +15,6 @@ export default class Main extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
   onChange() {
-    console.log('In view')
     this.setState(getState());
   }
   componentDidMount() {

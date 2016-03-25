@@ -20248,7 +20248,6 @@
 	  _createClass(Main, [{
 	    key: 'onChange',
 	    value: function onChange() {
-	      console.log('In view');
 	      this.setState(getState());
 	    }
 	  }, {
@@ -20325,7 +20324,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var fetchPodcasts = exports.fetchPodcasts = function fetchPodcasts() {
-	  console.log('In API');
 	  _superagent2.default.post('/data', {
 	    query: '{\n        podcasts {\n          _id,\n          title,\n          author,\n          url\n        }\n      }'
 	  }).end(function (err, res) {
@@ -21886,7 +21884,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var receivePodcasts = exports.receivePodcasts = function receivePodcasts(podcasts) {
-	  console.log('In Actions');
 	  _dispatcher2.default.dispatch({
 	    type: _constants.RECEIVE_PODCASTS,
 	    payload: {
@@ -22297,7 +22294,6 @@
 	    _dispatcher2.default.register(function (action) {
 	      switch (action.type) {
 	        case _constants.RECEIVE_PODCASTS:
-	          console.log('in store');
 	          _podcasts = action.payload.podcasts;
 	          _this.emit('change');
 	          break;
