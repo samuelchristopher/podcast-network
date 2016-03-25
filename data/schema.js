@@ -2,42 +2,52 @@ import {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLInt,
-  GraphQLString
+  GraphQLString,
+  GraphQLList
 } from 'graphql';
 
-let counter = 24;
 
-let query = new GraphQLObjectType({
-  name: 'Query',
-  fields: () => ({
-    counter: {
-      type: GraphQLInt,
-      resolve() {
-        return counter;
-      }
-    },
-    message: {
-      type: GraphQLString,
-      resolve() {
-        return "Hello graphql";
-      }
-    }
-  })
-});
-
-let schema = new GraphQLSchema({
-  query,
-  mutation: new GraphQLObjectType({
-    name: 'Mutation',
+let Schema = (db) => {
+  let podcastType = new GraphQLObjectType({
+    name: 'Podcast',
     fields: () => ({
-      incrementCounter: {
-        type: GraphQLInt,
+      _id: {
+        type: GraphQLString
+      },
+      author: {
+        type:  GraphQLString
+      },
+      title: {
+        type: GraphQLString
+      },
+      url: {
+        type: GraphQLString
+      }
+    })
+  });
+
+  let query = new GraphQLObjectType({
+    name: 'Query',
+    fields: () => ({
+      podcasts: {
+        type: new GraphQLList(podcastType),
         resolve() {
-          return counter++;
+         return db.collection('podcasts-test').find({}).toArray();
+        }
+      },
+      message: {
+        type: GraphQLString,
+        resolve() {
+          return "Hello graphql";
         }
       }
     })
-  })
-});
+  });
 
-export default schema;
+  let schema = new GraphQLSchema({
+    query
+  });
+
+  return schema;
+};
+export default Schema;

@@ -7,14 +7,14 @@ let app = express();
 let db;
 
 app.use(express.static('public'));
-app.use('/data', GraphQLHTTP({
-  graphiql: true,
-  schema
-}));
 
 MongoClient.connect(process.env.MONGO_URL, (err, database) => {
   if (err) throw err;
   db = database;
+  app.use('/data', GraphQLHTTP({
+    graphiql: true,
+    schema: schema(db)
+  }));
   app.listen(3000, () => console.log('Server started!') );
 });
 
