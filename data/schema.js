@@ -9,6 +9,7 @@ import {
 // import db from './database';
 
 let Schema = (db) => {
+  let store = {};
   let podcastType = new GraphQLObjectType({
     name: 'Podcast',
     fields: () => ({
@@ -23,23 +24,32 @@ let Schema = (db) => {
       },
       url: {
         type: GraphQLString
+      },
+      date: {
+        type: GraphQLString
       }
     })
   });
 
-  let query = new GraphQLObjectType({
-    name: 'Query',
+  let storeType = new GraphQLObjectType({
+    name: 'Store',
     fields: () => ({
       podcasts: {
         type: new GraphQLList(podcastType),
         resolve() {
          return db.collection('podcasts').find({}).toArray();
         }
-      },
-      message: {
-        type: GraphQLString,
+      }
+    })
+  })
+
+  let query = new GraphQLObjectType({
+    name: 'Query',
+    fields: () => ({
+      store: {
+        type: storeType,
         resolve() {
-          return "Hello graphql";
+          return store
         }
       }
     })
