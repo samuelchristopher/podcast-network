@@ -3,18 +3,28 @@ import {
   GraphQLObjectType,
   GraphQLInt,
   GraphQLString,
-  GraphQLList
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLID
 } from 'graphql';
 
-// import db from './database';
+import {
+  connectionDefinitions,
+  connectionArgs,
+  connectionFromPromisedArray
+} from 'graphql-relay';
 
 let Schema = (db) => {
   let store = {};
+
   let podcastType = new GraphQLObjectType({
     name: 'Podcast',
     fields: () => ({
-      _id: {
-        type: GraphQLString
+      id: {
+        type: new GraphQLNonNull(GraphQLID),
+        resolve(obj) {
+          return obj._id
+        }
       },
       author: {
         type:  GraphQLString
@@ -34,14 +44,23 @@ let Schema = (db) => {
   let storeType = new GraphQLObjectType({
     name: 'Store',
     fields: () => ({
-      podcasts: {
-        type: new GraphQLList(podcastType),
-        resolve() {
-         return db.collection('podcasts').find({}).toArray();
+      podcastConnection: {
+        type: podcastConnection.connectionType,
+        args: connectionArgs,
+        resolve(_, args) {
+         return connectionFromPromisedArray(
+           db.collection('podcasts').find({}).toArray(),
+           args
+         );
         }
       }
     })
-  })
+  });
+
+  let podcastConnection = new connectionDefinitions({
+    name: 'Podcast',
+    nodeType: podcastType
+  });
 
   let query = new GraphQLObjectType({
     name: 'Query',

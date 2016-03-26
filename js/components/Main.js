@@ -3,15 +3,9 @@ import Relay from 'react-relay';
 import Podcast from './Podcast';
 
 class Main extends React.Component {
-  static propTypes = {
-    limit: React.PropTypes.number
-  }
-  static defaultProps = {
-    limit: 6
-  }
   render() {
-    const modifiedArray = this.props.store.podcasts.slice(this.props.store.podcasts.length - this.props.limit, this.props.store.podcasts.lenght);
-    const podcasts = modifiedArray.reverse().map((podcast) => {
+    const { podcasts: podcastsArray } = this.props.store;
+    const podcasts = podcastsArray.map((podcast) => {
       return (
         <Podcast key={podcast._id} podcast={podcast} />
       )
