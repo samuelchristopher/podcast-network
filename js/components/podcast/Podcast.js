@@ -1,0 +1,42 @@
+import React from 'react';
+import Relay from 'react-relay';
+
+class Podcast extends React.Component {
+    render() {
+      const { url, date, title, author, imgUrl } = this.props.podcast;
+      const bgStyles = {
+        backgroundImage: `url(${url})`
+      };
+
+      return (
+        <div className="podcast podcast-1">
+          <div className="podcast__gradient"></div>
+          <div className="podcast__image" style={bgStyles}></div>
+          <div className="podcast__info">
+            <h3 className="podcast__info--date">{date}</h3>
+            <h2 className="podcast__info--title">{title}</h2>
+            <h4 className="podcast__info--author">{author}</h4>
+          </div>
+          <div className="podcast__controls">
+            <div className="podcast__controls--play"></div>
+            <div className="podcast__controls--download"></div>
+          </div>
+        </div>
+      );
+    }
+}
+
+Podcast = Relay.createContainer(Podcast, {
+  fragments: {
+    podcast: () => Relay.QL`
+      fragment on Podcast {
+        url,
+        title,
+        author,
+        date
+      }`
+  }
+});
+
+
+export default Podcast;

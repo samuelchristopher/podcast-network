@@ -1,7 +1,9 @@
 import React from 'react';
 import Relay from 'react-relay';
-import Podcast from './Podcast';
+import Podcast from './podcast/Podcast';
 import AddPodcast from './podcast/Add';
+import Header from './home/Header';
+// import LatestPodcasts from './home/LatestPodcasts';
 
 class Main extends React.Component {
   // setLimit(e) {
@@ -12,6 +14,13 @@ class Main extends React.Component {
   // }
 
   render() {
+
+    // <h1>Podcasts</h1>
+    // <AddPodcast store={this.props.store} />
+    // <ul>
+    //   {podcasts}
+    // </ul>
+    // <LatestPodcasts store={this.props.store}/>
     const { edges: podcastsArray } = this.props.store.podcastConnection;
     const podcasts = podcastsArray.reverse().map((edge) => {
       return (
@@ -20,11 +29,13 @@ class Main extends React.Component {
     });
     return (
       <div>
-        <h1>Podcasts</h1>
-        <AddPodcast store={this.props.store} />
-        <ul>
-          {podcasts}
-        </ul>
+        <Header />
+        <div className="latest-podcasts">
+          <p className="latest-podcasts__label">Latest podcasts</p>
+          <div className="podcasts">
+            { podcasts }
+          </div>
+        </div>
       </div>
     );
   }
