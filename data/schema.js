@@ -31,6 +31,9 @@ let Schema = (db) => {
       author: {
         type:  GraphQLString
       },
+      imgUrl: {
+        type:  GraphQLString
+      },
       title: {
         type: GraphQLString
       },
@@ -91,6 +94,9 @@ let Schema = (db) => {
       },
       url: {
         type: new GraphQLNonNull(GraphQLString)
+      },
+      imgUrl: {
+        type: new GraphQLNonNull(GraphQLString)
       }
     },
     outputFields: {
@@ -110,12 +116,13 @@ let Schema = (db) => {
         }
       }
     },
-    mutateAndGetPayload: ({ author, title, date, url }) => {
+    mutateAndGetPayload: ({ author, title, date, url, imgUrl }) => {
       return db.collection('podcasts').insertOne({
         author,
         title,
         date,
-        url
+        url,
+        imgUrl
       });
     }
   });

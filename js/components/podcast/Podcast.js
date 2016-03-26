@@ -5,11 +5,12 @@ class Podcast extends React.Component {
     render() {
       const { url, date, title, author, imgUrl } = this.props.podcast;
       const bgStyles = {
-        backgroundImage: `url(${url})`
+        backgroundImage: `url(${imgUrl})`
       };
 
+
       return (
-        <div className="podcast podcast-1">
+        <div className={imgUrl ? 'podcast' : 'podcast podcast-2'}>
           <div className="podcast__gradient"></div>
           <div className="podcast__image" style={bgStyles}></div>
           <div className="podcast__info">
@@ -33,7 +34,8 @@ Podcast = Relay.createContainer(Podcast, {
         url,
         title,
         author,
-        date
+        date,
+        imgUrl
       }`
   }
 });
