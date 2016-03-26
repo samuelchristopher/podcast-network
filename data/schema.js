@@ -11,7 +11,9 @@ import {
 import {
   connectionDefinitions,
   connectionArgs,
-  connectionFromPromisedArray
+  connectionFromPromisedArray,
+  mutationWithClientMutationId,
+  globalIdField
 } from 'graphql-relay';
 
 let Schema = (db) => {
@@ -44,6 +46,7 @@ let Schema = (db) => {
   let storeType = new GraphQLObjectType({
     name: 'Store',
     fields: () => ({
+      id: globalIdField('Store'),
       podcastConnection: {
         type: podcastConnection.connectionType,
         args: connectionArgs,
@@ -74,8 +77,59 @@ let Schema = (db) => {
     })
   });
 
+  let addPodcastMutation = mutationWithClientMutationId({
+    name: 'AddPodcast',
+    inputFields: {
+      author: {
+        type: new GraphQLNonNull(GraphQLString)
+      },
+      title: {
+        type: new GraphQLNonNull(GraphQLString)
+      },
+      date: {
+        type: new GraphQLNonNull(GraphQLString)
+      },
+      url: {
+        type: new GraphQLNonNull(GraphQLString)
+      }
+    },
+    outputFields: {
+      podcastEdge: {
+        type: podcastConnection.edgeType,
+        resolve(obj) {
+          return {
+            node: obj.ops[0],
+            cursor: obj.insertedId
+          };
+        }
+      },
+      store: {
+        type: storeType,
+        resolve() {
+          return store;
+        }
+      }
+    },
+    mutateAndGetPayload: ({ author, title, date, url }) => {
+      return db.collection('podcasts').insertOne({
+        author,
+        title,
+        date,
+        url
+      });
+    }
+  });
+
+  let mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: () => ({
+      addPodcast: addPodcastMutation
+    })
+  });
+
   let schema = new GraphQLSchema({
-    query
+    query,
+    mutation
   });
 
   return schema;

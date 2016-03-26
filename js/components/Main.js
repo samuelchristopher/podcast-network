@@ -19,10 +19,6 @@ class Main extends React.Component {
     return (
       <div>
         <h1>Podcasts</h1>
-        // <select onChange={this.setLimit.bind(this)}>
-        //   <option value="5">5</option>
-        //   <option value="10" selected>10</option>
-        // </select>
         <ul>
           {podcasts}
         </ul>
