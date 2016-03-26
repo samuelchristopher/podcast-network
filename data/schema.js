@@ -6,6 +6,7 @@ import {
   GraphQLList
 } from 'graphql';
 
+// import db from './database';
 
 let Schema = (db) => {
   let podcastType = new GraphQLObjectType({
