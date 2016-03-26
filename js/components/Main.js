@@ -1,5 +1,6 @@
 import React from 'react';
 import Relay from 'react-relay';
+import Podcast from './Podcast';
 
 class Main extends React.Component {
   static propTypes = {
@@ -12,9 +13,7 @@ class Main extends React.Component {
     const modifiedArray = this.props.store.podcasts.slice(this.props.store.podcasts.length - this.props.limit, this.props.store.podcasts.lenght);
     const podcasts = modifiedArray.reverse().map((podcast) => {
       return (
-        <li key={podcast._id}>
-          <a href={podcast.url}>{podcast.title} ({podcast.author})</a>
-        </li>
+        <Podcast key={podcast._id} podcast={podcast} />
       )
     });
     return (
@@ -34,9 +33,7 @@ Main = Relay.createContainer(Main, {
       fragment on Store {
         podcasts {
           _id,
-          url,
-          title,
-          author
+          ${Podcast.getFragment('podcast')}
         }
       }
     `
