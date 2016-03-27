@@ -1,5 +1,6 @@
 import React from 'react';
 import Relay from 'react-relay';
+import Player from './Player';
 
 class Podcast extends React.Component {
     render() {
@@ -10,18 +11,17 @@ class Podcast extends React.Component {
 
 
       return (
-        <div className={imgUrl ? 'podcast' : 'podcast podcast-2'}>
-          <div className="podcast__gradient"></div>
-          <div className="podcast__image" style={bgStyles}></div>
-          <div className="podcast__info">
-            <h3 className="podcast__info--date">{date}</h3>
-            <h2 className="podcast__info--title">{title}</h2>
-            <h4 className="podcast__info--author">{author}</h4>
+        <div>
+          <div className={imgUrl ? 'podcast' : 'podcast podcast-2'}>
+            <div className="podcast__gradient"></div>
+            <div className="podcast__image" style={bgStyles}></div>
+            <div className="podcast__info">
+              <h3 className="podcast__info--date">{date}</h3>
+              <h2 className="podcast__info--title">{title}</h2>
+              <h4 className="podcast__info--author">{author}</h4>
+            </div>
           </div>
-          <div className="podcast__controls">
-            <div className="podcast__controls--play"></div>
-            <div className="podcast__controls--download"></div>
-          </div>
+          <Player />
         </div>
       );
     }

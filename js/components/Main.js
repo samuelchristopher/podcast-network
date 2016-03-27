@@ -3,6 +3,7 @@ import Relay from 'react-relay';
 import Podcast from './podcast/Podcast';
 import AddPodcast from './podcast/Add';
 import Header from './home/Header';
+import Player from './podcast/Player';
 // import LatestPodcasts from './home/LatestPodcasts';
 
 class Main extends React.Component {
@@ -36,6 +37,7 @@ class Main extends React.Component {
             { podcasts }
           </div>
         </div>
+        <Player />
       </div>
     );
   }
