@@ -26,7 +26,7 @@ class Player extends React.Component {
     console.log('timeupdate...')
     let { music, playhead, pButton } = this.refs;
     var playPercent = this.state.timelineWidth * (music.currentTime / this.state.duration);
-	  playhead.style.marginLeft = playPercent + "px";
+	  playhead.style.left = playPercent + "px";
 	  if (music.currentTime == this.state.duration) {
 		  pButton.className = "";
 		  pButton.className = "play";
@@ -48,13 +48,13 @@ class Player extends React.Component {
     let { timelineWidth } = this.state;
     var newMargLeft = e.pageX - timeline.offsetLeft;
 	  if (newMargLeft >= 0 && newMargLeft <= timelineWidth) {
-		  playhead.style.marginLeft = newMargLeft + "px";
+		  playhead.style.left = newMargLeft + "px";
 	  }
 	  if (newMargLeft < 0) {
-		  playhead.style.marginLeft = "0px";
+		  playhead.style.left = "0px";
 	  }
 	  if (newMargLeft > timelineWidth) {
-  		playhead.style.marginLeft = timelineWidth + "px";
+  		playhead.style.left = timelineWidth + "px";
   	}
   }
   clickPercent(e) {
@@ -105,14 +105,16 @@ class Player extends React.Component {
     return (
       <div onMouseUp={this.handleMouseUp.bind(this)} className="container" ref="container">
         <audio id="music" onCanPlayThrough={this.handleReady.bind(this)} onTimeUpdate={this.timeUpdate.bind(this)} ref="music" preload="true">
-          <source src="http://www.alexkatz.me/codepen/music/interlude.mp3"></source>
-  			  <source src="http://www.alexkatz.me/codepen/music/interlude.ogg"></source>
+          <source src={this.props.podcast.url}></source>
 	      </audio>
         <div id="audioplayer">
 	        <button id="pButton" ref="pButton" className="play" onClick={this.play.bind(this)}></button>
           <div id="timeline" ref="timeline" onClick={this.handleClick.bind(this)}>
   		      <div id="playhead" onMouseDown={this.handleMouseDown.bind(this)} ref="playhead"></div>
           </div>
+        </div>
+        <div className="podcast__controls">
+          <a href={this.props.podcast.url} download="true"><div className="podcast__controls--download"></div></a>
         </div>
       </div>
     );

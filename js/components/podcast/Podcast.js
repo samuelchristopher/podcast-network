@@ -20,8 +20,8 @@ class Podcast extends React.Component {
               <h2 className="podcast__info--title">{title}</h2>
               <h4 className="podcast__info--author">{author}</h4>
             </div>
+            <Player podcast={this.props.podcast}/>
           </div>
-          <Player />
         </div>
       );
     }
