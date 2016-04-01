@@ -650,3 +650,10 @@ optgroup {
 body {
   background: #f4f4f4;
 }
+
+@media (max-width: 400px) {
+  .latest-podcasts {
+    width: 70%;
+    margin-bottom: 90px;
+  }
+}
