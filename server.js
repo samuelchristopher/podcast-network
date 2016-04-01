@@ -9,7 +9,7 @@ import fs from 'fs';
 import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
 
-const APP_PORT = 3000;
+const APP_PORT = process.env.PORT || 3000;
 const GRAPHQL_PORT = 8080;
 let graphQLServer = express();
 
