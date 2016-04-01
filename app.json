@@ -3,8 +3,5 @@
   "description": "A podcast network",
   "repository": "https://github.com/samuelchristopher/podcast-network/tree/kirubaiye",
   "logo": "http://s3.amazonaws.com/static.graphemica.com/glyphs/i500s/000/000/076/original/006B-500x500.png?1275288053",
-  "image": "heroku/nodejs",
-  "env": {
-    "MONGO_URL": "mongodb://root:password@ds015859.mlab.com:15859/podcast-network"
-  }
+  "image": "heroku/nodejs"
 }
