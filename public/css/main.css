@@ -656,4 +656,7 @@ body {
     width: 70%;
     margin-bottom: 90px;
   }
+  .podcast {
+    width: 235px;
+  }
 }
