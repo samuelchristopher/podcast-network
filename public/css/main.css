@@ -651,12 +651,19 @@ body {
   background: #f4f4f4;
 }
 
-@media (max-width: 400px) {
+@media(max-width: 815px) {
+  .latest-podcasts {
+    width: 80%;
+    margin-bottom: 90px;
+  }
+}
+
+@media (max-width: 500px) {
   .latest-podcasts {
     width: 70%;
     margin-bottom: 90px;
   }
   .podcast {
-    width: 235px;
+    width: 70vw;
   }
 }
