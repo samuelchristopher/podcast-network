@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
-    "dev": "nodemon --ignore data/schema.json --exec babel-node ./server.js"
+    "dev": "nodemon --exec node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "babel-preset-stage-0": "6.5.0",
     "babel-register": "^6.8.0",
     "babel-relay-plugin": "0.7.3",
+    "body-parser": "^1.15.0",
     "classnames": "2.2.3",
     "express": "4.13.4",
     "express-graphql": "0.4.9",
@@ -40,5 +41,8 @@
     "react-relay": "0.7.3",
     "webpack": "1.12.13",
     "webpack-dev-server": "1.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
   }
 }
