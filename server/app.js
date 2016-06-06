@@ -23,7 +23,8 @@ let compiler = webpack({
 let front = new WebpackDevServer(compiler, {
   contentBase: '/public/',
   publicPath: '/js/',
-  stats: {colors: true}
+  stats: {colors: true},
+  historyApiFallback: true
 });
 front.use(express.static('public'));
 
