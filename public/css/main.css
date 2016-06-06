@@ -419,6 +419,8 @@ optgroup {
 
 .nav__logo {
   font-weight: bold;
+  text-decoration: none;
+  color: #f0f0f0;
 }
 
 .nav__logo--light {
