@@ -1,25 +1,14 @@
-import 'babel-polyfill';
+import Main from './components/Main'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
-import Main from './components/Main';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Relay from 'react-relay';
 
-class HomeRoute extends Relay.Route {
-  static routeName = 'Home';
-  static queries = {
-    store: (Component) => Relay.QL`
-      query MainQuery {
-        store { ${Component.getFragment('store')} }
-      }
-    `
-  }
-}
 
 ReactDOM.render(
-  <Relay.RootContainer
-    Component={Main}
-    route={new HomeRoute()}
-  />,
+  <Router history={browserHistory}>
+    <Route path="/" component={Main} />
+  </Router>
+  ,
   document.getElementById('root')
-);
+)

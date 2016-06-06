@@ -1,65 +1,52 @@
 import React from 'react';
-import Relay from 'react-relay';
 import Podcast from './podcast/Podcast';
 import AddPodcast from './podcast/Add';
 import Header from './home/Header';
-// import LatestPodcasts from './home/LatestPodcasts';
+import request from 'superagent';
 
 class Main extends React.Component {
-  // setLimit(e) {
-  //   let limit = Number(e.target.value);
-  //   this.props.relay.setVariables({
-  //     limit
-  //   });
-  // }
 
-  render() {
+  constructor () {
+    super();
+    this.state = {
+      podcasts: [],
+      loading: true
+    }
+  }
 
-    // <h1>Podcasts</h1>
-    // <AddPodcast store={this.props.store} />
-    // <ul>
-    //   {podcasts}
-    // </ul>
-    // <LatestPodcasts store={this.props.store}/>
-    const { edges: podcastsArray } = this.props.store.podcastConnection;
-    const podcasts = podcastsArray.reverse().map((edge) => {
-      return (
-        <Podcast key={edge.node.id} podcast={edge.node} />
-      )
-    });
+  componentDidMount () {
+    request.get('http://localhost:3000/api/all-podcasts')
+      .then((response) => {
+        const { podcasts } = response.body
+        console.log(podcasts, this)
+        this.setState({
+          podcasts,
+          loading: false
+        })
+      })
+
+    console.log('Main component rendered')
+  }
+
+  render () {
+
+
+    const elements = this.state.podcasts.map((podcast) => {
+      return <Podcast key={podcast._id} podcast={podcast} />
+    })
     return (
       <div>
         <Header />
+        {this.state.loading ? "Loading" : "Done"}
         <div className="latest-podcasts">
           <p className="latest-podcasts__label">Latest podcasts</p>
           <div className="podcasts">
-            { podcasts }
+            { elements } hi
           </div>
         </div>
       </div>
     );
   }
 }
-
-Main = Relay.createContainer(Main, {
-  initialVariables: {
-    limit: 6
-  },
-  fragments: {
-    store: () => Relay.QL`
-      fragment on Store {
-        id,
-        podcastConnection(last: $limit) {
-          edges {
-            node {
-              id,
-              ${Podcast.getFragment('podcast')}
-            }
-          }
-        }
-      }
-    `
-  }
-});
 
 export default Main;

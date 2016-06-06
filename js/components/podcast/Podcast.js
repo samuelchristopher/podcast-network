@@ -1,5 +1,4 @@
 import React from 'react';
-import Relay from 'react-relay';
 import Player from './Player';
 
 class Podcast extends React.Component {
@@ -26,19 +25,6 @@ class Podcast extends React.Component {
       );
     }
 }
-
-Podcast = Relay.createContainer(Podcast, {
-  fragments: {
-    podcast: () => Relay.QL`
-      fragment on Podcast {
-        url,
-        title,
-        author,
-        date,
-        imgUrl
-      }`
-  }
-});
 
 
 export default Podcast;
