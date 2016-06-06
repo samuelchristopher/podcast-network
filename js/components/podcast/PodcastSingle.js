@@ -16,7 +16,7 @@ export default class PodcastSingle extends React.Component {
   }
   componentDidMount () {
     const { slug } = this.props.routeParams
-    request.get(`http://localhost:3000/api/podcast/${slug}`)
+    request.get(`http://localhost:8080/api/podcast/${slug}`)
       .then((response) => {
         const { podcast } = response.body
         this.setState({

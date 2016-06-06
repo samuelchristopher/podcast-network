@@ -18,7 +18,7 @@ class Main extends React.Component {
   }
 
   componentDidMount () {
-    request.get('http://localhost:3000/api/all-podcasts')
+    request.get('http://localhost:8080/api/all-podcasts')
       .then((response) => {
         const { podcasts } = response.body
         this.setState({

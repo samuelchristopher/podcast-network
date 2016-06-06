@@ -33,7 +33,8 @@ front.use(express.static('public'));
     const MONGO_URL = process.env.MONGO_URL
     let db = await MongoClient.connect(MONGO_URL)
     const app = express()
-    const APP_PORT = process.env.PORT || 3000
+    const FRONT_PORT = process.env.PORT || 3000
+    const APP_PORT = 8080
 
     app.set('database', db)
     app.use(bodyParser.json())
@@ -48,8 +49,8 @@ front.use(express.static('public'));
     app.post('/api/podcast', podcastController.handlePost)
     app.get('/api/podcast/:podcastSlug', podcastController.findPodcast)
 
-    front.listen(8080, () => {
-      console.log('Listening on port 8080, front')
+    front.listen(FRONT_PORT, () => {
+      console.log(`Listening on port ${FRONT_PORT}, front`)
     })
 
     app.listen(APP_PORT, () => {
