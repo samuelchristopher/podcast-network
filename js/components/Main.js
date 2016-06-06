@@ -30,7 +30,7 @@ class Main extends React.Component {
 
   render () {
 
-    const podcasts = this.state.podcasts.map((podcast) => {
+    const podcasts = this.state.podcasts.reverse().map((podcast) => {
       return <Podcast key={podcast._id} podcast={podcast} />
     })
 
