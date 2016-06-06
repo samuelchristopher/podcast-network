@@ -18,30 +18,26 @@ class Main extends React.Component {
     request.get('http://localhost:3000/api/all-podcasts')
       .then((response) => {
         const { podcasts } = response.body
-        console.log(podcasts, this)
         this.setState({
           podcasts,
           loading: false
         })
       })
-
-    console.log('Main component rendered')
   }
 
   render () {
 
-
-    const elements = this.state.podcasts.map((podcast) => {
+    const podcasts = this.state.podcasts.map((podcast) => {
       return <Podcast key={podcast._id} podcast={podcast} />
     })
+
     return (
       <div>
         <Header />
-        {this.state.loading ? "Loading" : "Done"}
         <div className="latest-podcasts">
           <p className="latest-podcasts__label">Latest podcasts</p>
           <div className="podcasts">
-            { elements } hi
+            { this.state.loading ? <h2>Loading</h2> : podcasts }
           </div>
         </div>
       </div>
