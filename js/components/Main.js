@@ -39,17 +39,17 @@ class Main extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div>
           <Header />
-            <div className="latest-podcasts">
-              <p className="latest-podcasts__label">Latest podcasts</p>
-              <ReactCSSTransitionGroup
-                transitionName="podcastLoad"
-                transitionEnterTimeout={600}
-                transitionLeaveTimeout={400}
-                className="podcasts"
-                component="div"
-                >
-                { this.state.loading ? <CircularProgress size={1.5} color="#df405a" /> : podcasts }
-              </ReactCSSTransitionGroup>
+          <div className="latest-podcasts">
+            <p className="latest-podcasts__label">Latest podcasts</p>
+            <ReactCSSTransitionGroup
+              transitionName="podcastLoad"
+              transitionEnterTimeout={600}
+              transitionLeaveTimeout={400}
+              className="podcasts"
+              component="div"
+              >
+              { this.state.loading ? <CircularProgress size={1.5} color="#df405a" /> : podcasts }
+            </ReactCSSTransitionGroup>
           </div>
         </div>
       </MuiThemeProvider>
