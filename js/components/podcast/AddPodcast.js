@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Snackbar from 'material-ui/Snackbar'
 import { verify } from 'password-hash'
 import { browserHistory } from 'react-router'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default class AddPodcast extends React.Component {
   constructor () {
@@ -96,7 +97,15 @@ export default class AddPodcast extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div>
           <Header />
-          <div className="latest-podcasts">
+          <ReactCSSTransitionGroup
+            transitionName="route"
+            transitionEnterTimeout={600}
+            transitionLeaveTimeout={400}
+            transitionAppearTimeout={600}
+            transitionAppear={true}
+            className="latest-podcasts"
+            component="div"
+            >
             <p className="latest-podcasts__label">Add new podcast</p>
             <TextField
               floatingLabelText="Title"
@@ -173,7 +182,7 @@ export default class AddPodcast extends React.Component {
             />
 
 
-          </div>
+          </ReactCSSTransitionGroup>
         </div>
       </MuiThemeProvider>
     )

@@ -5,6 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import CircularProgress from 'material-ui/CircularProgress'
 import RaisedButton from 'material-ui/RaisedButton'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default class PodcastSingle extends React.Component {
   constructor() {
@@ -57,12 +58,20 @@ export default class PodcastSingle extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div>
           <Header />
-          <div className="latest-podcasts">
-            <p className="latest-podcasts__label">By { podcast.author } on { podcast.date }</p>
+          <ReactCSSTransitionGroup
+            transitionName="route"
+            transitionEnterTimeout={600}
+            transitionLeaveTimeout={400}
+            transitionAppearTimeout={600}
+            transitionAppear={true}
+            className="latest-podcasts"
+            component="div"
+            >
+            <p className="latest-podcasts__label">{this.state.loading ? '' : `By ${podcast.author} on ${podcast.date}`}</p>
             <div className="podcasts">
               { thingToShow }
             </div>
-          </div>
+          </ReactCSSTransitionGroup>
         </div>
       </MuiThemeProvider>
     )
