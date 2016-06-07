@@ -20,9 +20,12 @@ let compiler = webpack({
   output: {filename: 'app.js', path: '/'}
 });
 
+const FRONT_PORT = process.env.PORT || 3000
+const APP_PORT = 8080
 let front = new WebpackDevServer(compiler, {
   contentBase: '/public/',
   publicPath: '/js/',
+  proxy: {'/api/*': `http://localhost:${APP_PORT}`},
   stats: {colors: true},
   historyApiFallback: true
 });
@@ -33,8 +36,6 @@ front.use(express.static('public'));
     const MONGO_URL = process.env.MONGO_URL
     let db = await MongoClient.connect(MONGO_URL)
     const app = express()
-    const FRONT_PORT = process.env.PORT || 3000
-    const APP_PORT = 8080
 
     app.set('database', db)
     app.use(bodyParser.json())
