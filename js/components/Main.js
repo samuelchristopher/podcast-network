@@ -6,6 +6,7 @@ import request from 'superagent';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import CircularProgress from 'material-ui/CircularProgress'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class Main extends React.Component {
 
@@ -40,9 +41,15 @@ class Main extends React.Component {
           <Header />
             <div className="latest-podcasts">
               <p className="latest-podcasts__label">Latest podcasts</p>
-              <div className="podcasts">
+              <ReactCSSTransitionGroup
+                transitionName="podcastLoad"
+                transitionEnterTimeout={600}
+                transitionLeaveTimeout={400}
+                className="podcasts"
+                component="div"
+                >
                 { this.state.loading ? <CircularProgress size={1.5} color="#df405a" /> : podcasts }
-              </div>
+              </ReactCSSTransitionGroup>
           </div>
         </div>
       </MuiThemeProvider>
