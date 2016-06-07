@@ -11,7 +11,7 @@ podcastController.handleGet = async function (req, res, next) {
 
 podcastController.handlePost = function (req, res, next) {
   db = req.app.get('database')
-  const { title, author, url, date, imgUrl, slug } = req.body.podcast
+  const { title, author, url, date, imgUrl, slug } = req.body
   db.collection('podcasts').insertOne({
     slug,
     url,
