@@ -41,14 +41,14 @@ export default class PodcastSingle extends React.Component {
       thingToShow = (
         <div>
           <h2 className="podcastSingle__title">{ podcast.title }</h2>
-          <audio src={ podcast.url } controls></audio>
+//           <audio src={ podcast.url } controls></audio>
           <br />
           <RaisedButton
             label="Download podcast"
             linkButton={true}
             href={podcast.url}
             secondary={true}
-            download={true}
+            target="_blank"
             style={style}
           />
         </div>
